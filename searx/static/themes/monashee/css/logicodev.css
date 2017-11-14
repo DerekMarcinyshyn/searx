@@ -1,5 +1,5 @@
 .searx-navbar {
-  background: #dddddd;
+  background: #e6e6e6;
   height: 50px;
   font-size: 14px;
   line-height: 1.3rem;
@@ -133,7 +133,7 @@ input[type=checkbox]:not(:checked) + .label_hide_if_checked + .label_hide_if_not
   color: #684898;
 }
 .result_header a .highlight {
-  background-color: #dddddd;
+  background-color: #e6e6e6;
 }
 .result-content {
   margin-top: 2px;
@@ -165,7 +165,7 @@ input[type=checkbox]:not(:checked) + .label_hide_if_checked + .label_hide_if_not
 .result-torrent:hover,
 .result-videos:hover,
 .result-map:hover {
-  background-color: #dddddd;
+  background-color: #e6e6e6;
 }
 .result-images {
   float: left !important;
@@ -254,7 +254,7 @@ input[type=checkbox]:not(:checked) + .label_hide_if_checked + .label_hide_if_not
   position: relative;
 }
 .infobox .panel-heading {
-  background-color: #dddddd;
+  background-color: #e6e6e6;
 }
 .infobox .panel-heading .panel-title {
   font-weight: 700;
@@ -296,7 +296,7 @@ input[type=checkbox]:not(:checked) + .label_hide_if_checked + .label_hide_if_not
   flex-basis: auto;
   font-size: 1.2rem;
   font-weight: normal;
-  background-color: #dddddd;
+  background-color: #e6e6e6;
   border: #a4a4a4 1px solid;
   border-right: none;
   color: #666666;
@@ -361,7 +361,7 @@ input[type=checkbox]:not(:checked) + .label_hide_if_checked + .label_hide_if_not
   font-size: 1.2rem;
   font-weight: normal;
   background-color: white;
-  border: #dddddd 1px solid;
+  border: #e6e6e6 1px solid;
   border-right: none;
   color: #666666;
   padding-bottom: 0.4rem;
@@ -370,7 +370,7 @@ input[type=checkbox]:not(:checked) + .label_hide_if_checked + .label_hide_if_not
 }
 #advanced-search-container label:last-child,
 #advanced-search-container .input-group-addon:last-child {
-  border-right: #dddddd 1px solid;
+  border-right: #e6e6e6 1px solid;
 }
 #advanced-search-container input[type="radio"] {
   display: none;
@@ -709,25 +709,43 @@ code {
   vertical-align: middle !important;
 }
 body {
-  background-color: #dddddd;
+  background-color: #e6e6e6;
 }
 .btn-default {
   border-color: #aaa;
 }
 .highlight {
-  background: #dddddd;
+  background: #e6e6e6;
 }
 .panel {
-  background: #cccccc;
+  background: #dddddd;
 }
 .panel-default {
   border-color: #aaa;
 }
 .panel-default > .panel-heading {
-  background-color: #dddddd;
+  background-color: #e6e6e6;
   border-color: #aaa;
 }
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
-  background-color: #dddddd;
+  background-color: #e6e6e6;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  background-color: #e6e6e6;
+}
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:focus {
+  border: 1px solid #aaa;
+}
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:focus {
+  border-bottom-color: #e6e6e6;
+}
+.nav-tabs.nav-justified > li > a {
+  border-bottom: 1px solid #aaa;
 }
