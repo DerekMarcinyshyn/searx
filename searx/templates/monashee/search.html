@@ -1,4 +1,4 @@
-{% from 'oscar/macros.html' import icon %}
+{% from 'monashee/macros.html' import icon %}
 <form method="{{ method or 'POST' }}" action="{{ url_for('index') }}" id="search_form" role="search">
   <div class="row">
     <div class="col-xs-12 col-md-8">
@@ -10,15 +10,15 @@
       </div>
     </div>
     <div class="col-xs-6 col-md-2 search-margin">
-        {% include 'oscar/time-range.html' %}
+        {% include 'monashee/time-range.html' %}
     </div>
     <div class="col-xs-6 col-md-2 search-margin">
-        {% include 'oscar/languages.html' %}
+        {% include 'monashee/languages.html' %}
     </div>
   </div>
   <div class="row">
     <div class="col-sm-12">
-        {% include 'oscar/categories.html' %}
+        {% include 'monashee/categories.html' %}
     </div>
   </div>
 </form><!-- / #search_form_full -->

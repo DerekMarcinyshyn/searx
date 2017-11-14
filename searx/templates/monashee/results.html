@@ -1,4 +1,4 @@
-{% extends "oscar/base.html" %}
+{% extends "monashee/base.html" %}
 {% macro search_form_attrs(pageno) -%}
     {% for category in selected_categories %}<input type="hidden" name="category_{{ category }}" value="1"/>{% endfor %}
     <input type="hidden" name="q" value="{{ q|e }}" />
@@ -11,7 +11,7 @@
 {% block title %}{{ q|e }} - {% endblock %}
 {% block meta %}<link rel="alternate" type="application/rss+xml" title="Searx search: {{ q|e }}" href="{{ search_url() }}&amp;format=rss">{% endblock %}
 {% block content %}
-    {% include 'oscar/search.html' %}
+    {% include 'monashee/search.html' %}
     <div class="row">
         <div class="col-sm-8" id="main_results">
             <h1 class="sr-only">{{ _('Search results') }}</h1>
@@ -40,15 +40,15 @@
             <div class="result {% if result['template'] %}result-{{ result.template|replace('.html', '') }}{% else %}result-default{% endif %}">
                 {% set index = loop.index %}
                 {% if result.template %}
-                    {% include get_result_template('oscar', result['template']) %}
+                    {% include get_result_template('monashee', result['template']) %}
                 {% else %}
-                    {% include 'oscar/result_templates/default.html' %}
+                    {% include 'monashee/result_templates/default.html' %}
                 {% endif %}
             </div>
             {% endfor %}
 
             {% if not results and not answers %}
-                {% include 'oscar/messages/no_results.html' %}
+                {% include 'monashee/messages/no_results.html' %}
             {% endif %}
 
             <div class="clearfix"></div>
@@ -106,7 +106,7 @@
 
             {% if infoboxes %}
                 {% for infobox in infoboxes %}
-                    {% include 'oscar/infobox.html' %}
+                    {% include 'monashee/infobox.html' %}
                 {% endfor %}
             {% endif %}
 

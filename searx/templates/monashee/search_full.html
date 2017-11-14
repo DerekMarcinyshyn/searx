@@ -1,4 +1,4 @@
-{% from 'oscar/macros.html' import icon %}
+{% from 'monashee/macros.html' import icon %}
 
 <form method="{{ method or 'POST' }}" action="{{ url_for('index') }}" id="search_form" role="search">
     {% if rtl %}
@@ -12,7 +12,7 @@
         </span>
     </div>
     <div class="col-md-8 col-md-offset-2  advanced">
-        {% include 'oscar/advanced.html' %}
+        {% include 'monashee/advanced.html' %}
     </div>
 
 </form><!-- / #search_form_full -->
