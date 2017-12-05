@@ -88,6 +88,9 @@ except:
 
 if sys.version_info[0] == 3:
     unicode = str
+    PY3 = True
+else:
+    PY3 = False
 
 # serve pages with HTTP/1.1
 from werkzeug.serving import WSGIRequestHandler
@@ -541,7 +544,8 @@ def index():
                                     'corrections': list(result_container.corrections),
                                     'infoboxes': result_container.infoboxes,
                                     'suggestions': list(result_container.suggestions),
-                                    'unresponsive_engines': list(result_container.unresponsive_engines)}),
+                                    'unresponsive_engines': list(result_container.unresponsive_engines)},
+                                   default=lambda item: list(item) if isinstance(item, set) else item),
                         mimetype='application/json')
     elif output_format == 'csv':
         csv = UnicodeWriter(StringIO())
@@ -604,7 +608,10 @@ def autocompleter():
     disabled_engines = request.preferences.engines.get_disabled()
 
     # parse query
-    raw_text_query = RawTextQuery(request.form.get('q', u'').encode('utf-8'), disabled_engines)
+    if PY3:
+        raw_text_query = RawTextQuery(request.form.get('q', b''), disabled_engines)
+    else:
+        raw_text_query = RawTextQuery(request.form.get('q', u'').encode('utf-8'), disabled_engines)
     raw_text_query.parse_query()
 
     # check if search query is set
