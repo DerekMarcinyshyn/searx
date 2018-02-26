@@ -106,7 +106,8 @@
                     {{ preferences_item_header(_('Choose style for this theme'), _('Style'), rtl) }}
                         <select class="form-control" name='oscar-style'>
                             <option value="logicodev" >Logicodev</option>
-                            <option value="pointhi" {% if cookies['oscar-style'] == 'pointhi' %}selected="selected"{% endif %}>Pointhi</option>
+                            <option value="pointhi" {% if preferences.get_value('oscar-style') == 'pointhi' %}selected="selected"{% endif %}>Pointhi</option>
+                            <option value="logicodev-dark" {% if preferences.get_value('oscar-style') == 'logicodev-dark' %}selected="selected"{% endif %}>Logicodev dark</option>
                         </select>
                     {{ preferences_item_footer(_('Choose style for this theme'), _('Style'), rtl) }}
 
@@ -186,7 +187,7 @@
                                     </td>
                                     <th>{{ search_engine.name }}</th>
 				    <td class="name">{{ shortcuts[search_engine.name] }}</td>
-					<td>{{ support_toggle(current_language == 'all' or current_language in search_engine.supported_languages or current_language.split('-')[0] in search_engine.supported_languages) }}</td>
+					<td>{{ support_toggle(current_language in search_engine.supported_languages or current_language.split('-')[0] in search_engine.supported_languages) }}</td>
 					<td>{{ support_toggle(search_engine.safesearch==True) }}</td>
 					<td>{{ support_toggle(search_engine.time_range_support==True) }}</td>
 					<td class="{{ 'danger' if stats[search_engine.name]['warn_time'] else '' }}">{{ 'N/A' if stats[search_engine.name].time==None else stats[search_engine.name].time }}</td>
@@ -196,7 +197,7 @@
 					<td class="{{ 'danger' if stats[search_engine.name]['warn_time'] else '' }}">{{ 'N/A' if stats[search_engine.name].time==None else stats[search_engine.name].time }}</td>
 					<td>{{ support_toggle(search_engine.time_range_support==True) }}</td>
 					<td>{{ support_toggle(search_engine.safesearch==True) }}</td>
-					<td>{{ support_toggle(current_language == 'all' or current_language in search_engine.supported_languages or current_language.split('-')[0] in search_engine.supported_languages) }}</td>
+					<td>{{ support_toggle(current_language in search_engine.supported_languages or current_language.split('-')[0] in search_engine.supported_languages) }}</td>
 					<td>{{ shortcuts[search_engine.name] }}</td>
                                     <th>{{ search_engine.name }}</th>
                                     <td class="onoff-checkbox">

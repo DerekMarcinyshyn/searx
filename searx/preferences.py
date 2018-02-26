@@ -12,7 +12,6 @@ if version[0] == '3':
 
 COOKIE_MAX_AGE = 60 * 60 * 24 * 365 * 5  # 5 years
 LANGUAGE_CODES = [l[0] for l in languages]
-LANGUAGE_CODES.append('all')
 DISABLED = 0
 ENABLED = 1
 DOI_RESOLVERS = list(settings['doi_resolvers'])
@@ -305,6 +304,13 @@ class Preferences(object):
             elif user_setting_name == 'disabled_plugins':
                 self.plugins.parse_cookie((input_data.get('disabled_plugins', ''),
                                            input_data.get('enabled_plugins', '')))
+            elif not any(user_setting_name.startswith(x) for x in [
+                    'enabled_',
+                    'disabled_',
+                    'engine_',
+                    'category_',
+                    'plugin_']):
+                self.unknown_params[user_setting_name] = user_setting
 
     def parse_form(self, input_data):
         disabled_engines = []
@@ -329,6 +335,8 @@ class Preferences(object):
     def get_value(self, user_setting_name):
         if user_setting_name in self.key_value_settings:
             return self.key_value_settings[user_setting_name].get_value()
+        if user_setting_name in self.unknown_params:
+            return self.unknown_params[user_setting_name]
 
     def save(self, resp):
         for user_setting_name, user_setting in self.key_value_settings.items():

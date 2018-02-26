@@ -19,6 +19,7 @@ along with searx. If not, see < http://www.gnu.org/licenses/ >.
 import sys
 import threading
 from os.path import realpath, dirname
+from io import open
 from flask_babel import gettext
 from operator import itemgetter
 from json import loads
@@ -36,7 +37,7 @@ engines = {}
 
 categories = {'general': []}
 
-languages = loads(open(engine_dir + '/../data/engines_languages.json').read())
+languages = loads(open(engine_dir + '/../data/engines_languages.json', 'r', encoding='utf-8').read())
 
 engine_shortcuts = {}
 engine_default_args = {'paging': False,
@@ -229,12 +230,12 @@ def load_engines(engine_list):
 
 def initialize_engines(engine_list):
     load_engines(engine_list)
-    for engine in engines.items():
+    for engine_name, engine in engines.items():
         if hasattr(engine, 'init'):
-            init_fn = getattr(engine, engine_attr)
+            init_fn = getattr(engine, 'init')
 
             def engine_init():
                 init_fn()
-                logger.debug('%s engine initialized', engine_data['name'])
-            logger.debug('Starting background initialization of %s engine', engine_data['name'])
+                logger.debug('%s engine initialized', engine_name)
+            logger.debug('Starting background initialization of %s engine', engine_name)
             threading.Thread(target=engine_init).start()

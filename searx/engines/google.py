@@ -9,6 +9,7 @@
 # @parse       url, title, content, suggestion
 
 import re
+from flask_babel import gettext
 from lxml import html, etree
 from searx.engines.xpath import extract_text, extract_url
 from searx import logger
@@ -164,7 +165,8 @@ def extract_text_from_dom(result, xpath):
 def request(query, params):
     offset = (params['pageno'] - 1) * 10
 
-    if params['language'] == 'all':
+    # temporary fix until a way of supporting en-US is found
+    if params['language'] == 'en-US':
         params['language'] = 'en-GB'
 
     if params['language'][:2] == 'jv':
@@ -185,6 +187,8 @@ def request(query, params):
     else:
         google_hostname = default_hostname
 
+    # original format: ID=3e2b6616cee08557:TM=5556667580:C=r:IP=4.1.12.5-:S=23ASdf0soFgF2d34dfgf-_22JJOmHdfgg
+    params['cookies']['GOOGLE_ABUSE_EXEMPTION'] = 'x'
     params['url'] = search_url.format(offset=offset,
                                       query=urlencode({'q': query}),
                                       hostname=google_hostname,
@@ -208,6 +212,9 @@ def response(resp):
     resp_url = urlparse(resp.url)
     if resp_url.netloc == 'sorry.google.com' or resp_url.path == '/sorry/IndexRedirect':
         raise RuntimeWarning('sorry.google.com')
+
+    if resp_url.path.startswith('/sorry'):
+        raise RuntimeWarning(gettext('CAPTCHA required'))
 
     # which hostname ?
     google_hostname = resp.search_params.get('google_hostname')

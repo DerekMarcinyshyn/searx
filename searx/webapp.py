@@ -165,6 +165,9 @@ def get_locale():
        and request.form['locale'] in settings['locales']:
         locale = request.form['locale']
 
+    if locale == 'zh_TW':
+        locale = 'zh_Hant_TW'
+
     return locale
 
 
@@ -375,6 +378,8 @@ def render(template_name, override_theme=None, **kwargs):
     kwargs['results_on_new_tab'] = request.preferences.get_value('results_on_new_tab')
 
     kwargs['unicode'] = unicode
+
+    kwargs['preferences'] = request.preferences
 
     kwargs['scripts'] = set()
     for plugin in request.user_plugins:
@@ -628,8 +633,8 @@ def autocompleter():
     if len(raw_results) <= 3 and completer:
         # get language from cookie
         language = request.preferences.get_value('language')
-        if not language or language == 'all':
-            language = 'en'
+        if not language:
+            language = settings['search']['language']
         else:
             language = language.split('-')[0]
         # run autocompletion

@@ -24,7 +24,7 @@ Installation
 -  run ``python searx/webapp.py`` to start the application
 
 For all the details, follow this `step by step
-installation <https://github.com/asciimoo/searx/wiki/Installation>`__
+installation <https://github.com/asciimoo/searx/wiki/Installation>`__.
 
 Bugs
 ~~~~
@@ -38,7 +38,7 @@ tracker <https://github.com/asciimoo/searx/issues>`__.
 More about searx
 ~~~~~~~~~~~~~~~~
 
--  `ohloh <https://www.ohloh.net/p/searx/>`__
+-  `openhub <https://www.openhub.net/p/searx/>`__
 -  `twitter <https://twitter.com/Searx_engine>`__
 -  IRC: #searx @ freenode
 

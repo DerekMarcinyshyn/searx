@@ -24,7 +24,7 @@ from flask_babel import gettext
 import requests.exceptions
 import searx.poolrequests as requests_lib
 from searx.engines import (
-    categories, engines
+    categories, engines, settings
 )
 from searx.answerers import ask
 from searx.utils import gen_useragent
@@ -135,7 +135,10 @@ def search_one_request_safe(engine_name, query, request_params, result_container
                              .format(engine_name, search_duration, timeout_limit, e))
             requests_exception = True
         else:
-            result_container.add_unresponsive_engine((engine_name, gettext('unexpected crash')))
+            result_container.add_unresponsive_engine((
+                engine_name,
+                u'{0}: {1}'.format(gettext('unexpected crash'), e),
+            ))
             # others errors
             logger.exception('engine {0} : exception : {1}'.format(engine_name, e))
 
@@ -216,6 +219,10 @@ def get_search_query_from_webapp(preferences, form):
         query_lang = form.get('language')
     else:
         query_lang = preferences.get_value('language')
+
+    # provides backwards compatibility for requests using old language default
+    if query_lang == 'all':
+        query_lang = settings['search']['language']
 
     # check language
     if not VALID_LANGUAGE_CODE.match(query_lang):
